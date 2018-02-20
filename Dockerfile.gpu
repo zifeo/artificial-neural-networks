@@ -11,7 +11,7 @@ RUN apt-get update && \
         wget \
         curl \
         vim \
-        libopenblas-base \
+	graphviz \
         python-dev \
         python3-dev \
         python3-pip \
@@ -23,7 +23,7 @@ RUN apt-get update && \
 
 RUN pip3 install --upgrade pip && \
     pip3 --no-cache-dir install --upgrade \
-        numpy \
+        numpy==1.13.0 \
         scipy \
         matplotlib \
         seaborn \
@@ -34,8 +34,8 @@ RUN pip3 install --upgrade pip && \
         pyaml \
         tqdm \
         tensorboard \
-        https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow_cpu-1.5.0-cp35-cp35m-linux_x86_64.whl \
-        keras \
+        tensorflow-gpu \
+	keras \
         jupyter \
         jupyter-tensorboard
 
@@ -44,6 +44,5 @@ RUN python3 -c 'import tensorflow; print(tensorflow.__version__)' && \
 
 WORKDIR /juypter
 
-ENTRYPOINT jupyter
-CMD notebook --ip=0.0.0.0 --allow-root --no-browser
+CMD jupyter notebook --ip=0.0.0.0 --allow-root --no-browser --NotebookApp.token=''
 
