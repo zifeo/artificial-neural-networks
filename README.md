@@ -1,13 +1,13 @@
 # Artificial Neural Networks
 
-[![Docker Build Status](https://img.shields.io/docker/build/zifeo/artificial-neural-networks.svg)]
+[![Docker Build Status](https://img.shields.io/docker/build/zifeo/artificial-neural-networks.svg)](https://hub.docker.com/r/zifeo/artificial-neural-networks/)
 
 Throughout the semester, we will use [Keras](https://keras.io) with its [Tensorflow](https://www.tensorflow.org) backend in pratical exercices and mini-projects.
 Due to the differences between platforms, we provide an all-in-one docker notebook image in two flavours.
 In case you own a [CUDA-enabled gpu](https://developer.nvidia.com/cuda-gpus) on GNU/Linux you can take advantage of the `gpu` version, otherwise the `cpu` version will do the job.
 
-Although we will not support it, you can as well create your own recipe using local install or [virtualenv](https://virtualenv.pypa.io/en/stable/).
-However your assignements should run fine with the same configuration:
+Although we do not support it, you can as well create your own setup using local installations or [virtualenv](https://virtualenv.pypa.io/en/stable/).
+However your assignements should run fine with the same configuration and within the image:
 
 - python 3.5
 - Keras==2.1.4
@@ -39,10 +39,10 @@ Then, you can start the notebook server and access [localhost:8888](http://local
 # to start
 docker run \
   --rm \ # the container will remove itself upon termination
-  -d \ the container will detach itself and run in background
+  -d \ # the container will detach itself and run in background
   --name ann \ # you can access live logs with `docker logs ann -f`
   -p 8888:8888 \ # bind local to docker port
-  -v $(pwd):/jupyter \ # bind current directory (pwd) to docker internal folder `jupyter`
+  -v $(pwd):/jupyter \ # bind current directory `pwd` to docker internal folder '/jupyter'
   zifeo/artificial-neural-networks:cpu # name of the image we are using
 
 # one-liner
@@ -56,7 +56,6 @@ Be carefull to use the volume mapping (-v) to a specified folder, otherwise you 
 
 ## GPU version
 
-If this does not apply to you, skip it.
 This flavour is slightly tricker and require Nvidia docker engine utility to be installed ([instructions](https://github.com/NVIDIA/nvidia-docker)).
 
 ```shell
