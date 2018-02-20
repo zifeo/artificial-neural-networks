@@ -39,9 +39,6 @@ RUN pip3 install --upgrade pip && \
         jupyter \
         jupyter-tensorboard
 
-RUN python3 -c 'import tensorflow; print(tensorflow.__version__)' && \
-        pip3 freeze
-
 WORKDIR /juypter
 
 CMD jupyter notebook --ip=0.0.0.0 --allow-root --no-browser --NotebookApp.token=''
