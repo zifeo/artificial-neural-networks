@@ -4,7 +4,7 @@
 
 Throughout the semester, we will use [Keras](https://keras.io) with its [Tensorflow](https://www.tensorflow.org) backend in pratical exercices and mini-projects. Due to the differences between platforms, we provide an all-in-one docker notebook image in two flavours. In case you own a [CUDA-enabled gpu](https://developer.nvidia.com/cuda-gpus) on GNU/Linux you can take advantage of the `gpu` version, otherwise the `cpu` version will do the job.
 
-Although we do not support it, you can as well create your own setup using local installations or [virtualenv](https://virtualenv.pypa.io/en/stable/). However your assignements should run fine with the same configuration and within the image:
+Although we do not support it, you can as well create your own setup using local packages or [virtualenv](https://virtualenv.pypa.io/en/stable/). However your assignements should run fine with the same configuration and within the image:
 
 - python==3.5
 - Keras==2.1.4
@@ -25,11 +25,11 @@ Once Docker is installed, you can test your setup:
 
 ```shell
 docker run --rm zifeo/artificial-neural-networks:cpu python3 -c 'import keras; print(keras.__version__)'
-# should output
 ```
 
+It should output:
+
 > Using TensorFlow backend.
->
 > 2.1.4
 
 Then, you can start the notebook server and access [localhost:8888](http://localhost:8888).
@@ -51,7 +51,7 @@ docker run --rm -d --name ann -p 8888:8888 -v $(pwd):/jupyter zifeo/artificial-n
 docker stop ann
 ```
 
-Be carefull to use the volume mapping (`-v`) to a specified folder, otherwise you work will be destroyed when stopping the notebook server.
+Be careful to use the volume mapping (`-v`) to a specified folder, otherwise you work will be destroyed when stopping the notebook server.
 
 ## GPU version
 
