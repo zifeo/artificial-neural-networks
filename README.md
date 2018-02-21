@@ -30,6 +30,7 @@ docker run --rm zifeo/artificial-neural-networks:cpu python3 -c 'import keras; p
 It should output:
 
 > Using TensorFlow backend.
+>
 > 2.1.4
 
 Then, you can start the notebook server and access [localhost:8888](http://localhost:8888).
