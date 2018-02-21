@@ -10,7 +10,7 @@ This flavour is slightly tricker and require [Nvidia docker engine utility](http
 # test
 docker run --runtime=nvidia --rm zifeo/artificial-neural-networks:gpu nvidia-smi
 
-# start
+# start ($(pwd) should be replaced by %cd% or ${PWD} on Windows)
 docker run --runtime=nvidia --rm -d --name ann -p 8888:8888 -v $(pwd):/jupyter zifeo/artificial-neural-networks:gpu
 
 # stop

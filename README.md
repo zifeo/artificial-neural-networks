@@ -48,8 +48,10 @@ docker run \
 # one-liner start
 # Mac + GNU/Linux
 docker run --rm -d --name ann -p 8888:8888 -v $(pwd):/jupyter zifeo/artificial-neural-networks:cpu 
-# Windows
+# Windows (Command Prompt)
 docker run --rm -d --name ann -p 8888:8888 -v %cd%:/jupyter zifeo/artificial-neural-networks:cpu 
+# Windows (PowerShell)
+docker run --rm -d --name ann -p 8888:8888 -v ${PWD}:/jupyter zifeo/artificial-neural-networks:cpu 
 
 # stop after usage
 docker stop ann
@@ -77,11 +79,8 @@ To sum up, here is a suggested workflow:
 # navigate to your desired folder
 cd CS-456
 
-# start the notebook server
-# Mac + GNU/Linux
+# start the notebook server ($(pwd) should be replaced by %cd% or ${PWD} on Windows)
 docker run --rm -d --name ann -p 8888:8888 -v $(pwd):/jupyter zifeo/artificial-neural-networks:cpu 
-# Windows
-docker run --rm -d --name ann -p 8888:8888 -v %cd%:/jupyter zifeo/artificial-neural-networks:cpu 
 
 # work on localhost:8888
 # your files should be persisted in directory you navigated
