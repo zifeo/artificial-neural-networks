@@ -1,3 +1,4 @@
 nvidia-docker-compose.yml
 .env
+.DS_Store
 
