@@ -2,9 +2,9 @@
 
 [![Docker Build Status](https://img.shields.io/docker/build/zifeo/artificial-neural-networks.svg)](https://hub.docker.com/r/zifeo/artificial-neural-networks/)
 
-Throughout the semester, we will use [Keras](https://keras.io) with its [Tensorflow](https://www.tensorflow.org) backend in pratical exercices and mini-projects. Due to the differences between platforms, we provide an all-in-one docker notebook image in two flavours. In case you own a [CUDA-enabled gpu](https://developer.nvidia.com/cuda-gpus) on GNU/Linux you can take advantage of the `gpu` version (see [ADVANCED.md](ADVANCED.md)), otherwise the `cpu` version will do the job.
+Throughout the semester, we will use [Keras](https://keras.io) with the [Tensorflow](https://www.tensorflow.org) backend in pratical exercices and mini-projects. Due to the differences between platforms and for the sake of reproducability, we provide an all-in-one docker image in two flavours. In case you own a [CUDA-enabled gpu](https://developer.nvidia.com/cuda-gpus) on GNU/Linux you can take advantage of the `gpu` version, otherwise the `cpu` version will do the job.
 
-Although we do not support it, you can as well create your own setup using local packages or [virtualenv](https://virtualenv.pypa.io/en/stable/). However your assignements should run fine with the same configuration and within this image:
+Although we do not support it, you can as well create your own local setup (e.g. using [virtualenv](https://virtualenv.pypa.io/en/stable/), see this [list](https://github.com/zifeo/artificial-neural-networks/blob/master/Dockerfile.cpu#L26-L38) of packages). However your assignements should run fine within this image and with the same config:
 
 - python==3.5
 - Keras==2.1.4
@@ -21,7 +21,7 @@ Although we do not support it, you can as well create your own setup using local
 
 ## CPU version
 
-Once Docker is installed, open a shell (Terminal on Mac and Linux, Command Prompt on Windows) and test your setup.
+Once Docker is installed and running, open a shell (Terminal on Mac and Linux, Command Prompt on Windows) and test your setup with:
 
 ```shell
 docker run --rm zifeo/artificial-neural-networks:cpu python3 -c 'import keras; print(keras.__version__)'
@@ -36,16 +36,7 @@ It should output:
 Then, you can start the notebook server and access [localhost:8888](http://localhost:8888).
 
 ```shell
-# start (explained, do not run)
-docker run \
-  --rm \ # the container will remove itself upon termination
-  -d \ # the container will detach itself and run in background
-  --name ann \ # you can access live logs with `docker logs ann -f`
-  -p 8888:8888 \ # publish docker port to local one
-  -v $(pwd):/jupyter \ # mount current directory to docker internal folder '/jupyter', on Windows replace $(pwd) by %cd% (for Command Prompt) or ${PWD} (for PowerShell)
-  zifeo/artificial-neural-networks:cpu # name of the image we are using
-
-# one-liner start
+# start
 # Mac + GNU/Linux
 docker run --rm -d --name ann -p 8888:8888 -v $(pwd):/jupyter zifeo/artificial-neural-networks:cpu 
 # Windows (Command Prompt)
@@ -53,11 +44,15 @@ docker run --rm -d --name ann -p 8888:8888 -v %cd%:/jupyter zifeo/artificial-neu
 # Windows (PowerShell)
 docker run --rm -d --name ann -p 8888:8888 -v ${PWD}:/jupyter zifeo/artificial-neural-networks:cpu 
 
-# stop after usage
+# stop (do not forget)
 docker stop ann
 ```
 
 Be careful to use the volume mapping (`-v`) to a specified folder, otherwise your work will be destroyed when stopping the notebook server.
+
+## Security notes
+
+This image does not include any security mechanism and thus should not be used in a open environment (e.g. public server or untrusted network) without adequat protection.
 
 ## Usage
 
@@ -69,28 +64,49 @@ You can then easily create new notebooks using the *new menu*.
 
 ![](screens/2.png)
 
-And check you have the expected Keras and Tensorflow version.
+And check you have the expected Keras and Tensorflow versions.
 
 ![](screens/3.png)
 
-To sum up, here is a suggested workflow:
+Happy coding!
+
+# Advanced usage
+
+The following is **not needed** to successfully achieve exercices and mini-projets but might be of interests to some of you.
+
+### Custom workflow
+
+The start command can be tailored to your needs.
 
 ```shell
-# navigate to your desired folder
-cd CS-456
+docker run \
+  --rm \ # the container will remove itself upon termination
+  -d \ # the container will detach itself and run in background
+  --name ann \ # you can access live logs with `docker logs ann -f`
+  -p 8888:8888 \ # publish docker port to local one
+  -v $(pwd):/jupyter \ # mount current directory to docker internal folder '/jupyter', on Windows replace $(pwd) by %cd% (for Command Prompt) or ${PWD} (for PowerShell)
+  zifeo/artificial-neural-networks:cpu # name of the image we are using
+```
 
-# start the notebook server ($(pwd) should be replaced by %cd% or ${PWD} on Windows)
-docker run --rm -d --name ann -p 8888:8888 -v $(pwd):/jupyter zifeo/artificial-neural-networks:cpu 
+## GPU version
 
-# work on localhost:8888
-# your files should be persisted in directory you navigated
+This flavour is slightly tricker and require [Nvidia docker engine utility](https://github.com/NVIDIA/nvidia-docker) to be installed ([instructions](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0))).
 
-# do not forgot to stop the notebook server at the end
+```shell
+# test
+docker run --runtime=nvidia --rm zifeo/artificial-neural-networks:gpu nvidia-smi
+
+# start ($(pwd) should be replaced by %cd% or ${PWD} on Windows)
+docker run --runtime=nvidia --rm -d --name ann -p 8888:8888 -v $(pwd):/jupyter zifeo/artificial-neural-networks:gpu
+
+# stop
 docker stop ann
 ```
 
-## Security notes
+## Tensorboard
 
-This image does not include any security mechanism and thus should not be used in a open environment (e.g. public server or untrusted network) without adequat protection.
+This image also includes an embedded version of [Tensorboard](https://www.tensorflow.org/programmers_guide/summaries_and_tensorboard) which can be spawn from the *new menu*. It should spawn a new board on [localhost:8888/tensorboard/1](http://localhost:8888/tensorboard/1) (for board 1) looking for logs in the current notebook directory. If nothing shows up after creating one, you can access it from the *running tab*.
+
+![](screens/4.png)
 
 
