@@ -11,7 +11,7 @@ RUN apt-get update && \
         wget \
         curl \
         vim \
-	graphviz \
+        graphviz \
         python-dev \
         python3-dev \
         python3-pip \
@@ -34,8 +34,8 @@ RUN pip3 install --upgrade pip && \
         pyaml \
         tqdm \
         tensorboard \
-        tensorflow-gpu \
-	keras \
+        tensorflow-gpu==1.5.0 \
+        keras==2.1.4 \
         jupyter \
         jupyter-tensorboard
 
