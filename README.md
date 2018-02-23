@@ -39,11 +39,11 @@ Then, you can start the notebook server and access [localhost:8888](http://local
 ```shell
 # start
 # Mac + GNU/Linux
-docker run --rm -d --name ann -p 8888:8888 -v $(pwd):/jupyter zifeo/artificial-neural-networks:cpu 
+docker run --rm -d --name ann -p 8888:8888 -v "$(pwd):/jupyter" zifeo/artificial-neural-networks:cpu 
 # Windows (Command Prompt)
-docker run --rm -d --name ann -p 8888:8888 -v %cd%:/jupyter zifeo/artificial-neural-networks:cpu 
+docker run --rm -d --name ann -p 8888:8888 -v "%cd%:/jupyter" zifeo/artificial-neural-networks:cpu 
 # Windows (PowerShell)
-docker run --rm -d --name ann -p 8888:8888 -v ${PWD}:/jupyter zifeo/artificial-neural-networks:cpu 
+docker run --rm -d --name ann -p 8888:8888 -v "${PWD}:/jupyter" zifeo/artificial-neural-networks:cpu 
 
 # stop (do not forget)
 docker stop ann
@@ -85,7 +85,7 @@ docker run \
   -d \ # the container detach itself and run in background
   --name ann \ # self-explanatory, access live logs with `docker logs ann -f`
   -p 8888:8888 \ # publish docker port to local one
-  -v $(pwd):/jupyter \ # mount current directory to container folder '/jupyter', on Windows replace $(pwd) by %cd% (for Command Prompt) or ${PWD} (for PowerShell)
+  -v "$(pwd):/jupyter" \ # mount current directory to container folder '/jupyter', on Windows replace $(pwd) by %cd% (for Command Prompt) or ${PWD} (for PowerShell)
   zifeo/artificial-neural-networks:cpu # image to run
 ```
 
@@ -98,7 +98,7 @@ This flavour is slightly trickier and require [Nvidia driver and Nvidia docker e
 docker run --runtime=nvidia --rm zifeo/artificial-neural-networks:gpu nvidia-smi
 
 # start ($(pwd) should be replaced by %cd% or ${PWD} on Windows)
-docker run --runtime=nvidia --rm -d --name ann -p 8888:8888 -v $(pwd):/jupyter zifeo/artificial-neural-networks:gpu
+docker run --runtime=nvidia --rm -d --name ann -p 8888:8888 -v "$(pwd):/jupyter" zifeo/artificial-neural-networks:gpu
 
 # stop
 docker stop ann
