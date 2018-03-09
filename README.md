@@ -18,7 +18,11 @@ Although we do not support it, you can as well use [conda/miniconda](https://con
 - Ubuntu: [instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 - Debian: [instructions](https://docs.docker.com/install/linux/docker-ce/debian/)
 - Windows 10: [instructions](https://docs.docker.com/docker-for-windows/install/) or [direct download](https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe)
-- Windows 7 or 8: [instructions](https://docs.docker.com/toolbox/toolbox_install_windows/) or [direct download](https://download.docker.com/win/stable/DockerToolbox.exe) (legacy, try to upgrade or fallback to [this example](http://www.deeplearningitalia.com/en/installation/) if it does not work)
+- Windows 7 or 8: [instructions](https://docs.docker.com/toolbox/toolbox_install_windows/) or [direct download](https://download.docker.com/win/stable/DockerToolbox.exe) (Docker Toolbox is legacy, better try to upgrade or fallback to [this example](http://www.deeplearningitalia.com/en/installation/) if it does not work)
+
+### CPU and memory settings
+
+You might need to allow more CPU cores and more RAM to work with the selected datasets (and to get faster processing). On Ubuntu/Debian, there is no limit by default. On other platforms, you can update your limits following this [Mac instructions](https://docs.docker.com/docker-for-mac/#advanced) or this [Windows 10 instructions](https://docs.docker.com/docker-for-windows/#advanced). For Windows 7 or 8, as Docker Toolbox uses VirtualBox under the hood you need to increase the VM limits directly via VirtualBox following those [instructions](https://superuser.com/a/926341).
 
 ## CPU version
 
