@@ -38,7 +38,7 @@ It should output:
 >
 > 2.1.4
 
-Then, you can start the notebook server and access [localhost:8888](http://localhost:8888).
+Then, you can start the notebook server and access [localhost:8888](http://localhost:8888) (in case of Docker Toolbox, access [192.168.99.100:8888](http://192.168.99.100:8888)).
 
 ```shell
 # start
